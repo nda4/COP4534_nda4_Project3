@@ -47,12 +47,16 @@ void BruteForce::perm1(int permsThisCall)
 BruteForce::BruteForce(Matrix *matrix, int numCities){
   this->NUMELEMENTS = numCities;
   this->s = new int[this->NUMELEMENTS + 1];
-  for(int i = 0; i < NUMELEMENTS; i++){
+  for(int i = 0; i < this->NUMELEMENTS; i++){
     s[i] = i%20;
   }
   s[this->NUMELEMENTS] = 0;
   this->matrix = matrix;
   this->bestCase = getBestCase();
+  
+  std::cout <<"\nBrute Force Algorithm Best Case: " << this->bestCase << std::endl;
+
+  delete s;
 }
 
 double BruteForce::getBestCase(){
@@ -67,36 +71,17 @@ double BruteForce::getBestCase(){
   double testCase;
   for(int q = 0; q < num; q++){
     testCase = 0;
-    // while(s[0] != 0)
-    //   perm1(this->NUMELEMENTS - 1);
     if(this->s[0] == 0){
     for(int j = 0; j < NUMELEMENTS; j++){
-      // std::cout << testCase << "\ttestCase\n";
       testCase += this->matrix->matrix[s[j]][s[j+1]];
-      // std::cout << std::endl << this->matrix->matrix[s[j]][s[j+1]] << std::endl;
-      // std::cout << testCase << "\ttestCase B\n";
       
     }
-    // std::cout <<"\nNEWLINE test\n";
     if(testCase < best)
       best = testCase;
-    for(int y = 0; y < this->NUMELEMENTS +1; y++)
-      std::cout << s[y] << "\t";
-    std::cout << std::endl << std::endl;
-    // std::cout << best << " BESTCASE\n\n";
     perm1(this->NUMELEMENTS - 1);
     }
     else
       perm1(this->NUMELEMENTS - 1);
   }
-
-  std::cout << std::endl << best;
-
   return best;
-}
-
-int main(){
-  Matrix matrix;
-  BruteForce BF(&matrix, 4);
-  return 0;
 }

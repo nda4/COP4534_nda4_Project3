@@ -3,22 +3,18 @@
 #include <iostream>
 #include <fstream>
 
-
-class Matrix{
-    public:
+class Matrix
+{
+public:
     double matrix[20][20] = {};
     int numEdge;
     Matrix();
     Matrix(std::string filename, int numNodes);
 
-    private:
-    void readFile(std::string filename);    
+private:
+    void readFile(std::string filename);
 
     void printMatrix();
-
 };
-
-
-
 
 #endif
